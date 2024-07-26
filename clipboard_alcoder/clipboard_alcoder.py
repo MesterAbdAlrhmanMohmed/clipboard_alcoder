@@ -56,11 +56,20 @@ class MainWindow(qt.QMainWindow):
         w=qt.QWidget()
         w.setLayout(l)
         self.setCentralWidget(w)
+    def closeEvent(self, event):
+        reply=qt.QMessageBox.question(self, 'تأكيد الخروج',
+                                    "هل أنت متأكد أنك تريد الخروج؟",
+                                    qt.QMessageBox.StandardButton.Ok | qt.QMessageBox.StandardButton.Cancel,
+                                    qt.QMessageBox.StandardButton.Cancel)
+        if reply == qt.QMessageBox.StandardButton.Ok:
+            self.close()
+        else:
+            event.ignore()
     def ShowHide(self):
         if self.isVisible():
             self.hide()
         else:
-            self.show()
+            self.show()    
     def on_clipboard_change(self):
         text=self.clipboard.text()
         if text and text != self.current_text:
