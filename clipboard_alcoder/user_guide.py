@@ -9,5 +9,6 @@ class dialog(qt.QDialog):
         self.الدليل=qt.QListWidget()
         self.الدليل.addItem("CTRL+C. نسخ العنصر")
         self.الدليل.addItem("CTRL+D. حذف العنصر")                
+        self.الدليل.addItem("CTRL+F. إضافى العنصر الى المفضلة")
         l=qt.QVBoxLayout(self)
         l.addWidget(self.الدليل)                
