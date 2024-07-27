@@ -1,7 +1,7 @@
 from PyQt6 import QtWidgets as qt
 from PyQt6 import QtGui as qt1
 from PyQt6 import QtCore as qt2
-import os,keyboard,about,user_guide
+import os,about,user_guide
 class ClipboardThread(qt2.QThread):
     def __init__(self, text, parent=None):
         super().__init__(parent)
@@ -44,8 +44,7 @@ class MainWindow(qt.QMainWindow):
         self.عن.clicked.connect(self.about)
         qt1.QShortcut("ctrl+c", self).activated.connect(self.copy_selected_item)
         qt1.QShortcut("ctrl+d", self).activated.connect(self.delete_selected_item)
-        qt1.QShortcut("ctrl+f", self).activated.connect(self.add_to_favorites)
-        keyboard.add_hotkey("ctrl+shift+z",self.ShowHide)
+        qt1.QShortcut("ctrl+f", self).activated.connect(self.add_to_favorites)        
         l=qt.QVBoxLayout()
         l.addWidget(self.إظهار_البحث)
         l.addWidget(self.البحث)
@@ -64,12 +63,7 @@ class MainWindow(qt.QMainWindow):
         if reply == qt.QMessageBox.StandardButton.Ok:
             self.close()
         else:
-            event.ignore()
-    def ShowHide(self):
-        if self.isVisible():
-            self.hide()
-        else:
-            self.show()    
+            event.ignore()    
     def on_clipboard_change(self):
         text=self.clipboard.text()
         if text and text != self.current_text:
