@@ -1,14 +1,14 @@
 from PyQt6 import QtWidgets as qt
 from PyQt6 import QtGui as qt1
 from PyQt6 import QtCore as qt2
-import os,about,user_guide
+import os,pyperclip, about,user_guide
 class ClipboardThread(qt2.QThread):
     def __init__(self, text, parent=None):
         super().__init__(parent)
         self.text=text
     def run(self):
-        clipboard=qt.QApplication.clipboard()
-        clipboard.setText(self.text)
+        clipboard=pyperclip
+        clipboard.copy(self.text)
 class MainWindow(qt.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -33,6 +33,7 @@ class MainWindow(qt.QMainWindow):
         self.البحث.textChanged.connect(self.search_items)
         self.العناصر=qt.QListWidget()
         self.العناصر.setAccessibleName("عناصر الحافِظة")
+        self.العناصر.clicked.connect(self.copy_selected_item)
         self.المفضلة=qt.QPushButton("المفضلة")
         self.المفضلة.setDefault(True)
         self.المفضلة.clicked.connect(self.show_favorite_window)
