@@ -1,14 +1,14 @@
 from PyQt6 import QtWidgets as qt
 from PyQt6 import QtGui as qt1
 from PyQt6 import QtCore as qt2
-import os
+import os,pyperclip
 class ClipboardThread(qt2.QThread):
     def __init__(self, text, parent=None):
         super().__init__(parent)
         self.text=text
     def run(self):
-        clipboard=qt.QApplication.clipboard()
-        clipboard.setText(self.text)
+        clipboard=pyperclip
+        clipboard.copy(self.text)
 class dialog(qt.QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
